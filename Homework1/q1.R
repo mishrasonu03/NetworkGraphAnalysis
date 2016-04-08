@@ -14,11 +14,11 @@ degreesVector2 <- degree(graph2)
 degreesVector3 <- degree(graph3)
 
 # plotting degree distributions
-hist1 <- hist(degreesVector1, breaks=seq(-0, by=1, length.out=max(degreesVector1)+5), main="Degree Distribution with p=0.01")
+hist1 <- hist(degreesVector1, breaks=seq(0, by=1, length.out=max(degreesVector1)+5), main="Degree Distribution with p=0.01")
 dev.new()
-hist2 <- hist(degreesVector2, breaks=seq(-0, by=1, length.out=max(degreesVector2)+5), main="Degree Distribution with p=0.05")
+hist2 <- hist(degreesVector2, breaks=seq(0, by=1, length.out=max(degreesVector2)+5), main="Degree Distribution with p=0.05")
 dev.new()
-hist3 <- hist(degreesVector3, breaks=seq(-0, by=1, length.out=max(degreesVector3)+5), main="Degree Distribution with p=0.10")
+hist3 <- hist(degreesVector3, breaks=seq(0, by=1, length.out=max(degreesVector3)+5), main="Degree Distribution with p=0.10")
 
 
 ###(b)
@@ -29,8 +29,10 @@ if(is.connected(graph1))
   print("Graph is connected")
   dia1 =diameter(graph1, directed = FALSE, unconnected = FALSE, weights = NULL)
   print(sprintf("Diameter of graph is: %d", dia1))
-} else
+} else{
   print("Graph is NOT connected")
+  print("Diameter of graph is INFINITY")
+}
 
 cat("Checking connectivity of graph with p=0.05",'\n')
 if(is.connected(graph2))
@@ -38,8 +40,10 @@ if(is.connected(graph2))
   print("Graph is connected.")
   dia2 =diameter(graph2, directed = FALSE, unconnected = FALSE, weights = NULL)
   print(sprintf("Diameter of graph is: %d", dia2))
-} else 
+} else {
   print("Graph is NOT connected.")
+  print("Diameter of graph is INFINITY")
+}
 
 cat("Checking connectivity of graph with p=0.10",'\n')
 if(is.connected(graph3))
@@ -47,8 +51,10 @@ if(is.connected(graph3))
   print("Graph is connected.")
   dia3 =diameter(graph3, directed = FALSE, unconnected = FALSE, weights = NULL)
   print(sprintf("Diameter of graph is: %d", dia3))
-} else 
+} else {
   print("Graph is NOT connected.")
+  print("Diameter of graph is INFINITY")
+}
 
 
 ###(c)
