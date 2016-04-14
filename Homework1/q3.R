@@ -5,7 +5,7 @@ cat("Create a random graph by simulating its evolution...\n")
 g_r <- aging.prefatt.game(1000,pa.exp = 1, aging.exp = -1, aging.bin = 1000, directed = FALSE)
 g_r_d <- degree_distribution(g_r)
 cat("Plot degree distribution...\n")
-plot(1:length(g_r_d), g_r_d, "h", main="Random Graph Degree Distribution", xlab = "Degree", ylab = "Probability of Degree")
+hist_gr <- hist(degree(g_r), breaks=seq(0, by=1 , length.out=max(degree(g_r))+2),main="",xlab = "Degree",ylab="Probability of Degree",freq=FALSE)
 
 #b)
 cat("Fast greedy method to find the community structure...\n")
