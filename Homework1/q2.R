@@ -9,7 +9,7 @@ graph1 <- barabasi.game(1000, directed=FALSE)
 
 cat("Plotting the degree distribution...\n")
 deg_dist <- degree_distribution(graph1)
-plot(1:length(deg_dist), deg_dist, "h", main="Degree Distribution", xlab = "Degree", ylab = "Probability of Degree")
+plot(1:length(deg_dist), deg_dist, type="o", main="Degree Distribution", xlab = "Degree", ylab = "Probability of Degree")
 
 
 # Diameter
@@ -26,8 +26,17 @@ if(is.connected(graph1))
 
 ## (b)
 clust1 <- clusters(graph1)
-gcc1 <- induced.subgraph(graph1, which(clust1$membership == which.max(clust1$csize)))
+# gcc1 <- induced.subgraph(graph1, which(clust1$membership == which.max(clust1$csize)))
+gccIndex = which.max(clust1$csize)
+nonGccNodes <- (1:vcount(graph1))[clust1$membership != gccIndex]
+gcc1 <- delete.vertices(graph1, nonGccNodes)
+
 fg1 <- fastgreedy.community(gcc1)
+cmsize <- sizes(fg1)
+cmsize <- as.vector(sizes(fg1))
+gccNodes <- (1:vcount(graph1))[clust1$membership == gccIndex]
+cm1Nodes <- gccNodes[fg1$membership == 1]
+
 print(sprintf("Modularity of the graph is: %f", max(fg1$modularity)))
 
 
@@ -40,21 +49,30 @@ fg2 <- fastgreedy.community(graph2)
 print(sprintf("Modularity of the graph is: %f", max(fg2$modularity)))
 
 
-## (d)
+# (d)
 cat("Picking a node i at random...\n")
-i = floor(runif(1)*1000)
-# nbr_size <- ego_size(graph1, 1, i)
-nbr_size <- ego_size(graph1, 1, i) - 1
-temp = ceiling(runif(1)*nbr_size)
-nbr <- ego(graph1, 1, i)
-# j = as.integer(nbr[[1]][temp])
-j = as.integer(nbr[[1]][temp + 1])
-print(sprintf("i = %d and j=%d", i, j))
+LARGE_NUMBER = 1000;
+degreej <- vector(mode="integer", length=LARGE_NUMBER)
 
-# nbrGraph <- graph.neighborhood(graph2, 1, j)
-nbrGraph <- graph.neighborhood(graph1, 1, j)
-cat("Plotting the degree distribution of node j...\n")
-deg_dist2 <- degree_distribution(nbrGraph[[1]])
-dev.new()
-# hist(degrees, breaks=seq(0, by=1, length.out=max(degrees)+5))
-plot(1:length(deg_dist2), deg_dist2, "h", main="Degree Distribution of Node j", xlab = "Degree", ylab = "Probability of Degree")
+for (x in 1:LARGE_NUMBER){
+	i = floor(runif(1)*1000) + 1
+	# nbr_size <- ego_size(graph1, 1, i)
+	nbr_size <- ego_size(graph1, 1, i) - 1
+	temp = ceiling(runif(1)*nbr_size)
+	nbr <- ego(graph1, 1, i)
+	# j = as.integer(nbr[[1]][temp])
+	j = as.integer(nbr[[1]][temp + 1])
+	degreej[x] <- degree(graph1, j)
+}
+# cat(degreej)
+hist(degreej, freq=FALSE, breaks=seq(0, by=1, length.out=50), main="Degree Distribution")
+
+
+
+# cat(degree(graph1, j))
+# nbrGraph <- graph.neighborhood(graph1, 1, j)
+# cat("Plotting the degree distribution of node j...\n")
+# deg_dist2 <- degree_distribution(nbrGraph[[1]])
+# dev.new()
+# # hist(degrees, breaks=seq(0, by=1, length.out=max(degrees)+5))
+# plot(1:length(deg_dist2), deg_dist2, "h", main="Degree Distribution of Node j", xlab = "Degree", ylab = "Probability of Degree")
