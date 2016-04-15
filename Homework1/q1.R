@@ -10,30 +10,30 @@ graph2 <- random.graph.game(1000, 0.05, directed=F);
 graph3 <- random.graph.game(1000, 0.10, directed=F);
 
 # finding the degrees distribution
-deg_dist1 <- degree_distribution(graph1)
-deg_dist2 <- degree_distribution(graph2)
-deg_dist3 <- degree_distribution(graph3)
+# deg_dist1 <- degree_distribution(graph1)
+# deg_dist2 <- degree_distribution(graph2)
+# deg_dist3 <- degree_distribution(graph3)
 
-cat("Plotting the degree distributions for each graph...\n")
-dev.new()
-plot(1:length(deg_dist1), deg_dist1, type="o", main="Degree Distribution with p=0.01", xlab = "Degree", ylab = "Probability of Degree")
-dev.new()
-plot(1:length(deg_dist2), deg_dist2, type="o", main="Degree Distribution with p=0.05", xlab = "Degree", ylab = "Probability of Degree")
-dev.new()
-plot(1:length(deg_dist3), deg_dist3, type="o", main="Degree Distribution with p=0.10", xlab = "Degree", ylab = "Probability of Degree")
+# cat("Plotting the degree distributions for each graph...\n")
+# dev.new()
+# plot(1:length(deg_dist1), deg_dist1, type="h", xlab = "Degree", ylab = "Probability of Degree")
+# dev.new()
+# plot(1:length(deg_dist2), deg_dist2, type="h", xlab = "Degree", ylab = "Probability of Degree")
+# dev.new()
+# plot(1:length(deg_dist3), deg_dist3, type="h", xlab = "Degree", ylab = "Probability of Degree")
 
 
-# degreesVector1 <- degree(graph1)
-# degreesVector2 <- degree(graph2)
-# degreesVector3 <- degree(graph3)
+degreesVector1 <- degree(graph1)
+degreesVector2 <- degree(graph2)
+degreesVector3 <- degree(graph3)
 
 # plotting degree distributions
-# dev.new()
-# hist1 <- hist(degreesVector1, breaks=seq(0, by=1, length.out=max(degreesVector1)+5), main="Degree Distribution with p=0.01")
-# dev.new()
-# hist2 <- hist(degreesVector2, breaks=seq(0, by=1, length.out=max(degreesVector2)+5), main="Degree Distribution with p=0.05")
-# dev.new()
-# hist3 <- hist(degreesVector3, breaks=seq(0, by=1, length.out=max(degreesVector3)+5), main="Degree Distribution with p=0.10")
+dev.new()
+hist1 <- hist(degreesVector1, freq=FALSE, ylim=c(0, 0.15), breaks=seq(0, by=1, length.out=max(degreesVector1)+10), xlab = "Degree", ylab = "Probability of Degree")
+dev.new()
+hist2 <- hist(degreesVector2, freq=FALSE, ylim=c(0, 0.08), breaks=seq(0, by=1, length.out=max(degreesVector2)+10), xlab = "Degree", ylab = "Probability of Degree")
+dev.new()
+hist3 <- hist(degreesVector3, freq=FALSE, ylim=c(0, 0.05), breaks=seq(0, by=1, length.out=max(degreesVector3)+10), xlab = "Degree", ylab = "Probability of Degree")
 
 
 ###(b)
@@ -75,7 +75,7 @@ if(is.connected(graph3))
 ###(c)
 # cat('\n',"(c)",'\n')
 
-LARGE_NUMBER = 10000
+LARGE_NUMBER = 1000
 sum <- 0;
 for (x in 1:LARGE_NUMBER){
   pc=0.000

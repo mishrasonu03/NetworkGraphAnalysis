@@ -4,12 +4,12 @@ library("igraph")
 cat("Creating a random graph of 1K nodes...\n")
 graph1 <- barabasi.game(1000, directed=FALSE)
 
-# Degree distribution
-# hist(degree(graph1), breaks=50, main="Degree Distribution")
-
 cat("Plotting the degree distribution...\n")
-deg_dist <- degree_distribution(graph1)
-plot(1:length(deg_dist), deg_dist, type="o", main="Degree Distribution", xlab = "Degree", ylab = "Probability of Degree")
+# deg_dist <- degree_distribution(graph1)
+# plot(1:length(deg_dist), deg_dist, type="o", main="Degree Distribution", xlab = "Degree", ylab = "Probability of Degree")
+dev.new()
+deg_dist <- degree(graph1)
+hist1 <- hist(deg_dist, freq=FALSE, breaks=seq(0, by=1, length.out=max(deg_dist)+10), xlab = "Degree", ylab = "Probability of Degree")
 
 
 # Diameter
@@ -65,14 +65,5 @@ for (x in 1:LARGE_NUMBER){
 	degreej[x] <- degree(graph1, j)
 }
 # cat(degreej)
-hist(degreej, freq=FALSE, breaks=seq(0, by=1, length.out=50), main="Degree Distribution")
-
-
-
-# cat(degree(graph1, j))
-# nbrGraph <- graph.neighborhood(graph1, 1, j)
-# cat("Plotting the degree distribution of node j...\n")
-# deg_dist2 <- degree_distribution(nbrGraph[[1]])
-# dev.new()
-# # hist(degrees, breaks=seq(0, by=1, length.out=max(degrees)+5))
-# plot(1:length(deg_dist2), deg_dist2, "h", main="Degree Distribution of Node j", xlab = "Degree", ylab = "Probability of Degree")
+dev.new();
+hist(degreej, ylim=c(0, 0.25), freq=FALSE, breaks=seq(0, by=1, length.out=50), main="Degree Distribution", xlab = "Degree", ylab = "Probability of Degree")
