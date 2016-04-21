@@ -1,12 +1,9 @@
 library(igraph)
 library(netrw)
 
-findDistanceAggregates <- function(graph, nodes, flag)
+findDistanceAggregates <- function(graph, nodes, flag, tlim)  # pass tlim as an argument
 {
-  if (nodes >= 1000){
-    tlim = min(nodes, 100);
-  } else tlim = 1000;
-
+  
   avg <- rep(NA, tlim)
   stdev <- rep(NA, tlim)
   variance <- rep(NA, tlim)
@@ -32,17 +29,17 @@ findDistanceAggregates <- function(graph, nodes, flag)
   plot(1:tlim, stdev, type="line", xlab="Number of Steps", ylab="Standard Deviation")
   dev.new()
   plot(1:tlim, variance, type="line", xlab="Number of Steps", ylab="Variance")
-
+  
   #1 e
   if(flag==1) {
     dev.new()
-    hist(degree(graph), freq= FALSE, xlab="Degree", ylab="Frequency", main="Degree Distribution of graph")
+    hist(degree(graph), freq=FALSE, xlab = "Degree", ylab = "Probability of Degree")
     degeesVector <- rep(NA,nodes)
     for(i in (1:nodes)) {
       # print(i)
       degeesVector[i] = degree(graph,rw$walk.path[tlim,i])
     }
     dev.new()
-    hist(degeesVector, xlab="Degree", freq= FALSE, ylab="Frequency", main="Degree distribution of nodes at the end of random walk")
+    hist(degeesVector, xlab="Degree", freq= FALSE, ylab="Probability of Degree")
   }
 }
