@@ -1,7 +1,7 @@
 source(file="findDistanceAggregates.R")
 
 ## a
-g_a = barabasi.game(1000,directed=FALSE,power=-3)
+g_a = barabasi.game(1000,directed=FALSE)
 diameter(g_a, directed = FALSE, unconnected = FALSE, weights = NULL)
 g_degree=degree(g_a)
 hist(g_degree, freq=FALSE, breaks=seq(0, by=1, length.out=max(g_degree)+10), xlab = "Degree", ylab = "Probability of Degree")
