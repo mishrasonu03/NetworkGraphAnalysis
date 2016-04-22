@@ -21,7 +21,6 @@ findDistanceAggregates <- function(graph, nodes, flag, tlim, nround)  # pass tli
     stdev[t] = sd(as.vector(sdr))
     variance[t] = var(as.vector(sdr))
   }
-  
   # print(avg)
   # print(stdev)
   # print(variance)
@@ -44,6 +43,6 @@ findDistanceAggregates <- function(graph, nodes, flag, tlim, nround)  # pass tli
       degeesVector[i] = degree(graph,rw$walk.path[tlim,i])
     }
     dev.new()
-    hist(degeesVector, breaks=seq(0, by=1, length.out=25), xlab="Degree", freq= FALSE, ylab="Probability of Degree")
+    hist(degeesVector, breaks=seq(0, by=1, length.out=25), xlab="Degree", freq= FALSE, ylab="Probability of Degrees")
   }
 }
