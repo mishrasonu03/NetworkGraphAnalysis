@@ -1,7 +1,7 @@
 source("findDistanceAggregates.R")
 
 # 1.a)
-g_1000 <- random.graph.game(1000, 0.01, directed=FALSE)
+g_1000 <- random.graph.game(1000, 0.01,directed=FALSE)
 
 # 1.b)
 findDistanceAggregates(g_1000, 1000, 1, 100, 10)
@@ -21,4 +21,4 @@ print(diameter(g_1000))
 print(diameter(g_10000))
 
 # 1.e)
-# it is getting done when 1.b calls the function findDistanceAggregates
+# it is getting done when 1.b calls the function findDistanceAggregates()
