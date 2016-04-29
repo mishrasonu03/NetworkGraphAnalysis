@@ -3,10 +3,10 @@ source(file="computeMaxGraph.R")
 
 #load file
 filePath="E:/sorted_directed_net.txt"
-g=maxGraph(read.graph(file=filePath,format="ncol"))
+g=maxGraph(read.graph(file=filePath,format="ncol",directed=T))
 
 #compute q3
-g_undirected = as.undirected(g,mode="collapse",edge.attr.comb=list(weight=function(x) sprt(prod(x)),name="ignore"))
+g_undirected = as.undirected(g,mode="collapse",edge.attr.comb=list(weight=function(x) sqrt(prod(x)),name="ignore"))
 g_com = label.propagation.community(g_undirected)
 
 #random walk
