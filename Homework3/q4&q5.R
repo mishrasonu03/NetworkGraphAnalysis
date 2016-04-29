@@ -3,7 +3,7 @@ source(file="computeMaxGraph.R")
 
 #load file
 filePath="E:/sorted_directed_net.txt"
-gcc=maxGraph(read.graph(file=filePath,format="ncol"))
+gcc=maxGraph(read.graph(file=filePath,format="ncol",directed=T))
 
 #4)
 
