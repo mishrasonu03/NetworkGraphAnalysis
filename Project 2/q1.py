@@ -25,6 +25,8 @@ for line in actor:
     
     tmp = re.split(r'\t+',line)
     if len(tmp)>=6:
+        for j in range(len(tmp)):
+            tmp[j] = re.sub(r'^\s+|\s+$','',tmp[j])
         actor_actress.append(tmp)
         tmp = '\t\t'.join(tmp)
         out.write(tmp)
@@ -43,6 +45,8 @@ for line in actress:
     
     tmp = re.split(r'\t+',line)
     if len(tmp)>=6:
+        for j in range(len(tmp)):
+            tmp[j] = re.sub(r'^\s+|\s+$','',tmp[j])
         actor_actress.append(tmp)
         tmp = '\t\t'.join(tmp)
         out.write(tmp)

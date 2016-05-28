@@ -12,6 +12,7 @@ actor_actress_lines = fa.readlines()
 actor_actress = [[]]
 
 for line in actor_actress_lines:
+    line = re.sub(r'^\s+|\s+$','',line)
     tmp = re.split(r'\t+',line)
     actor_actress.append(tmp)
     
