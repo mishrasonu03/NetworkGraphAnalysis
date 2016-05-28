@@ -2,7 +2,6 @@ import os
 import sys
 import re
 import numpy as np
-import csv
 
 os.chdir(os.path.abspath(os.path.dirname(sys.argv[0])))
 
@@ -64,8 +63,6 @@ print "creating graph matrix"
 edgelist = np.zeros(shape=(len(Edge_h)*2,3))
 index = 0
 for ekey in Edge_h:
-    if index%10000==0:
-        print index
     ENum = Edge_h[ekey]
     vertex_1 = ekey[0]
     vertex_2 = ekey[1]
@@ -82,6 +79,11 @@ for ekey in Edge_h:
     index = index + 1
 
 np.savetxt('edgelist_matrix.txt',edgelist,delimiter=' ')
-with open('Act_ID.txt','w') as file:
-    writer = csv.writer(file,delimiter='\t')
-    writer.writerows(ANum2Name)
+out = open('Act_ID.txt','w+')
+for key in ANum2Name:
+    out.write(str(key))
+    out.write('\t\t')
+    out.write(ANum2Name[key])
+    out.write('\n')
+
+out.close()
