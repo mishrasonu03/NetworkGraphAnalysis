@@ -2,6 +2,7 @@ import os
 import sys
 import re
 import numpy as np
+import csv
 
 os.chdir(os.path.abspath(os.path.dirname(sys.argv[0])))
 
@@ -9,11 +10,14 @@ os.chdir(os.path.abspath(os.path.dirname(sys.argv[0])))
 fa = open('actor_actress.txt','r')
 actor_actress_lines = fa.readlines()
 
-actor_actress = []
+actor_actress = [[]]
 
 for line in actor_actress_lines:
     tmp = re.split(r'\t+',line)
     actor_actress.append(tmp)
+    
+actor_actress.remove([])
+    
 
 fa.close()
 
@@ -77,3 +81,7 @@ for ekey in Edge_h:
     edgelist[index][2] = weight_2
     index = index + 1
 
+np.savetxt('edgelist_matrix.txt',edgelist,delimiter=' ')
+with open('Act_ID.txt','w') as file:
+    writer = csv.writer(file,delimiter='\t')
+    writer.writerows(ANum2Name)

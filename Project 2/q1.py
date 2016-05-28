@@ -28,6 +28,7 @@ for line in actor:
         actor_actress.append(tmp)
         tmp = '\t\t'.join(tmp)
         out.write(tmp)
+        out.write('\n')
 
 for line in actress:
     line = re.sub(r'\(+uncredited+\)','',line)
@@ -45,6 +46,7 @@ for line in actress:
         actor_actress.append(tmp)
         tmp = '\t\t'.join(tmp)
         out.write(tmp)
+        out.write('\n')
 
 f_actor.close()
 f_actress.close()
