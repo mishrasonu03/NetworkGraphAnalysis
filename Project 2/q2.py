@@ -68,8 +68,8 @@ for ekey in Edge_h:
     vertex_1 = ekey[0]
     vertex_2 = ekey[1]
 
-    weight_1 = ENum / num_movie_act[vertex_1]
-    weight_2 = ENum / num_movie_act[vertex_2]
+    weight_1 = float(ENum) / float(num_movie_act[vertex_1])
+    weight_2 = float(ENum) / float(num_movie_act[vertex_2])
     edgelist[index][0] = vertex_1
     edgelist[index][1] = vertex_2
     edgelist[index][2] = weight_1
