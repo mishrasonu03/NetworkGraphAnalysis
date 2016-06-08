@@ -197,6 +197,7 @@ v5 <- c()
 d <- c()
 g <- c()
 r <- c()
+d <- c()
 
 for (i in 1:length(Movie_Inter_list))
 {
@@ -215,20 +216,34 @@ for (i in 1:length(Movie_Inter_list))
     r = c(r,Movie_Rating_h[[tmp_m]])
     tmp_g = Movie_genre_h[[tmp_m]]
     g = c(g,genre_rating_m[[tmp_g]])
-    d = c(d,0)
-    for (i in 1:length(tmp_d))
+    
+    flag = 0
+    for (j in 1:length(topdirector))
     {
-      isnull = top_director_h[[tmp_d[i]]]
-      if (is.null(isnull)==FALSE)
+      index = match(topdirector[j],tmp_d)
+      if (is.na(index))
       {
-        d[length(d)] = 1
-        break
+        d = c(d,0)
+      }
+      else
+      {
+        d = c(d,1)
+        flag = 1
       }
     }
+    if (flag==0)
+      d = c(d,1)
+    else
+      d = c(d,0)
   }
 }
 
+mat_d = matrix(d,nrow = length(Movie_Inter_list),ncol = (length(topdirector)+1))
+mat_d_t = t(mat_d)
 
 
-regre_data = data.frame(v1,v2,v3,v4,v5,d,g,r)
+
+regre_data = data.frame(m,v1,v2,v3,v4,v5,g,r)
+regre_d = data.frame(mat_d_t)
 write.csv(regre_data,"/home/rstudio/ee232/regre_data.csv")
+write.csv(regre_d,"/home/rstudio/ee232/regre_d.csv")
