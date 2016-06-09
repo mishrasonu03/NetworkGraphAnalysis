@@ -13,7 +13,7 @@ actor_actress = [[]]
 
 for line in actor_actress_lines:
     line = re.sub(r'^\s+|\s+$','',line)
-    tmp = re.split(r'\t+',line)
+    tmp = re.split(r'[\t]+',line)
     actor_actress.append(tmp)
     
 actor_actress.remove([])
@@ -28,8 +28,8 @@ Edge_h = {}
 MNum2Name = {}
 ANum2Name = {}
 num_movie_act = []
-Act_ID = 0
-Movie_ID = 0
+Act_ID = 1
+Movie_ID = 1
 
 print "hashing process"
 for i in range(len_all):
@@ -48,7 +48,7 @@ for i in range(len_all):
             Movie2Actor_h[tmpline[j]].append(Act_ID)
     Act_ID = Act_ID + 1
 
-print "creating edgelist"
+'''print "creating edgelist"
 for key in Movie2Actor_h:
     if (len(Movie2Actor_h[key])<=1):
         continue
@@ -68,8 +68,8 @@ for ekey in Edge_h:
     vertex_1 = ekey[0]
     vertex_2 = ekey[1]
 
-    weight_1 = float(ENum) / float(num_movie_act[vertex_1])
-    weight_2 = float(ENum) / float(num_movie_act[vertex_2])
+    weight_1 = float(ENum) / float(num_movie_act[vertex_1-1])
+    weight_2 = float(ENum) / float(num_movie_act[vertex_2-1])
     edgelist[index][0] = vertex_1
     edgelist[index][1] = vertex_2
     edgelist[index][2] = weight_1
@@ -79,12 +79,13 @@ for ekey in Edge_h:
     edgelist[index][2] = weight_2
     index = index + 1
 
-np.savetxt('edgelist_matrix.txt',edgelist,delimiter=' ')
-out = open('Act_ID.txt','w+')
-for key in ANum2Name:
-    out.write(str(key))
-    out.write('\t\t')
-    out.write(ANum2Name[key])
-    out.write('\n')
+np.savetxt('edgelist_matrix.txt',edgelist,delimiter=' ')'''
+
+with open("Act_ID.txt",'w+') as out:
+    for key in ANum2Name:
+        out.write(str(key))
+        out.write('\t\t')
+        out.write(ANum2Name[key])
+        out.write('\n')
 
 out.close()

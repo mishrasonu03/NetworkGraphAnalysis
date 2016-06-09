@@ -31,8 +31,8 @@ MName2Num = {}
 ANum2Name = {}
 num_movie_act = []
 num_act_movie = []
-Act_ID = 0
-Movie_ID = 0
+Act_ID = 1
+Movie_ID = 1
 Actor2Movie = {}
 
 print "hashing process"
@@ -50,10 +50,21 @@ for i in range(len_all):
     Act_ID = Act_ID + 1
 
 for key in Movie2Actor_h:
-    if len(Movie2Actor_h[key])>=5:
+    if len(Movie2Actor_h[key])>=15:
         Movie2Actor_c[key] = Movie2Actor_h[key]
 
-i = 0
+with open('movie2actor.txt','w+') as ma:
+    for key in Movie2Actor_c: 
+        tmp = Movie2Actor_c[key]
+        ma.write(key)
+        for i in range(len(tmp)):
+            ma.write('\t\t')
+            ma.write(str(tmp[i]))
+        ma.write('\n')
+ma.close()
+    
+
+i = 1
 for key in Movie2Actor_c:
     MNum2Name[i] = key
     tmp = Movie2Actor_c[key]
@@ -66,9 +77,12 @@ for key in Movie2Actor_c:
             Actor2Movie[tmp[j]].append(i)
     i = i + 1
 
+count = 0 
 print "creating edgelist"
 Edge_h = {}
 for key in Actor2Movie:
+    print count
+    count = count + 1
     tmp = Actor2Movie[key]
     len_tmp = len(tmp)
     for i in range(len_tmp-1):
@@ -90,20 +104,20 @@ for ekey in Edge_h:
     vertex_1 = ekey[0]
     vertex_2 = ekey[1]
 
-    weight = float(ENum) / float((num_act_movie[vertex_1] + num_act_movie[vertex_2] - ENum))
+    weight = float(ENum) / float((num_act_movie[vertex_1-1] + num_act_movie[vertex_2-1] - ENum))
     edgelist[index][0] = vertex_1
     edgelist[index][1] = vertex_2
     edgelist[index][2] = weight
     index = index + 1
 
 np.savetxt('edgelist_matrix_movie.txt',edgelist,delimiter=' ')
-out = open('Movie_ID.txt','w+')
 
-for key in MNum2Name:
-    out.write(str(key))
-    out.write('\t\t')
-    out.write(MNum2Name[key])
-    out.write('\n')
+with open('Movie_ID.txt','w+') as out:
+    for key in MNum2Name:
+        out.write(str(key))
+        out.write('\t\t')
+        out.write(MNum2Name[key])
+        out.write('\n')
 
 out.close()
 

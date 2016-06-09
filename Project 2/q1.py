@@ -11,7 +11,6 @@ out = open("actor_actress.txt",'w+')
 actor = f_actor.readlines()
 actress = f_actress.readlines()
 
-count = 0
 actor_actress = []
 with open("actor_actress.txt",'w+') as out:
     for line in actor:
@@ -27,7 +26,6 @@ with open("actor_actress.txt",'w+') as out:
 
         tmp = re.split(r'[\t]+',line)
         if len(tmp)>=6:
-            count = count + 1
             for j in range(len(tmp)):
                 tmp[j] = re.sub(r'^\s+|\s+$','',tmp[j])
             actor_actress.append(tmp)
@@ -48,7 +46,6 @@ with open("actor_actress.txt",'w+') as out:
 
         tmp = re.split(r'[\t]+',line)
         if len(tmp)>=6:
-            count = count + 1
             for j in range(len(tmp)):
                 tmp[j] = re.sub(r'^\s+|\s+$','',tmp[j])
             actor_actress.append(tmp)
