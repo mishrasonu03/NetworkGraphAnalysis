@@ -1,6 +1,6 @@
 # Network Graph Analysis
 
-This repository has projects and homeworks of the course EE 232E: Graphs and Network Flows.  
+This repository has projects and homeworks of the course Graphs and Network Flows.  
 
 ## Homeworks
 Homework 1: Community detection in synthetic networks using Fast-greedy algorithm  
